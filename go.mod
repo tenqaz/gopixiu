@@ -7,7 +7,9 @@ require (
 	github.com/bndr/gojenkins v1.1.0
 	github.com/caoyingjunz/pixiulib v0.0.0-20220819163605-c3c10ec3ed3c
 	github.com/gin-gonic/gin v1.8.1
-	github.com/go-playground/validator/v10 v10.11.0 // indirect
+	github.com/go-playground/locales v0.14.0
+	github.com/go-playground/universal-translator v0.18.0
+	github.com/go-playground/validator/v10 v10.11.0
 	github.com/goccy/go-json v0.9.11 // indirect
 	github.com/golang-jwt/jwt/v4 v4.4.2
 	github.com/google/go-cmp v0.5.8 // indirect

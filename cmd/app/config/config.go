@@ -35,6 +35,7 @@ type DefaultOptions struct {
 	LogDir   string `yaml:"log_dir"`
 	LogLevel string `yaml:"log_level"`
 	JWTKey   string `yaml:"jwt_key"`
+	Locale   string `yaml:"locale"`
 }
 
 type MysqlOptions struct {

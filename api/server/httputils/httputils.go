@@ -18,6 +18,8 @@ package httputils
 
 import (
 	"fmt"
+	"github.com/caoyingjunz/gopixiu/pkg/util"
+	"github.com/go-playground/validator/v10"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -29,10 +31,10 @@ import (
 type Response struct {
 	Code    int         `json:"code"`              // 返回的状态码
 	Result  interface{} `json:"result,omitempty"`  // 正常返回时的数据，可以为任意数据结构
-	Message string      `json:"message,omitempty"` // 异常返回时的错误信息
+	Message interface{} `json:"message,omitempty"` // 异常返回时的错误信息
 }
 
-func (r *Response) Error() string {
+func (r *Response) Error() interface{} {
 	return r.Message
 }
 
@@ -43,6 +45,12 @@ func (r *Response) SetCode(c int) {
 func (r *Response) SetMessage(m interface{}) {
 	switch msg := m.(type) {
 	case error:
+		errs, ok := msg.(validator.ValidationErrors)
+		if ok {
+			// 校验错误，友好输出
+			r.Message = util.RemoveTopStruct(errs.Translate(util.Trans))
+			return
+		}
 		r.Message = msg.Error()
 	case string:
 		r.Message = msg

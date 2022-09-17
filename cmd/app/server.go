@@ -19,6 +19,7 @@ package app
 import (
 	"context"
 	"fmt"
+	"github.com/caoyingjunz/gopixiu/api/server/initialize"
 	"net/http"
 	"os"
 	"os/signal"
@@ -89,6 +90,9 @@ func Run(opt *options.Options) error {
 	if err := pixiu.CoreV1.Cloud().Init(); err != nil {
 		return err
 	}
+
+	// 优化错误输出
+	initialize.InitTrans(opt.ComponentConfig.Default.Locale)
 
 	// 初始化 api 路由
 	InitRouters(opt)
